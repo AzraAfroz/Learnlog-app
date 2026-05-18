@@ -16,7 +16,16 @@ const app = express();
 
 
 
-app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      connectSrc: ["'self'", process.env.FRONTEND_URL || "*"],
+    },
+  },
+  crossOriginEmbedderPolicy: false,
+  crossOriginResourcePolicy: { policy: "cross-origin" },
+}));
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 

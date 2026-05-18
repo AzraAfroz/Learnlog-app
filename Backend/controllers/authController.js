@@ -4,10 +4,7 @@ const crypto = require('crypto');
 const sendEmail = require('../utils/emailSender');
 
 const getFrontendUrl = () => {
-  const url = process.env.FRONTEND_URL;
-  if (!url) {
-    throw new Error('Missing FRONTEND_URL environment variable');
-  }
+  const url = process.env.FRONTEND_URL || 'http://localhost:5173';
   return url.replace(/\/+$/, '');
 };
 
